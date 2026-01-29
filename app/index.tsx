@@ -1,15 +1,12 @@
-import { Text, View } from "react-native";
+import { Redirect } from "expo-router";
+import { useSelector } from "react-redux";
 
 export default function Index() {
-  return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text>Edit app/index.tsx to edit this screen.</Text>
-    </View>
-  );
+  const { isLoggedIn } = useSelector((state: any) => state.user);
+
+  if (isLoggedIn) {
+    return <Redirect href="/(app)/home" />;
+  } else {
+    return <Redirect href="/(auth)" />;
+  }
 }
